@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import baseWeaponImage from './images/weapon_greatsword_r1.png';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="pure-g">
+      <div className="pure-u-1-3">
+        <div>
+        <img className="img-base-wearable" src={baseWeaponImage} alt="Stock Weapon" />
+        <div>
+          <input type="text"/>
+          <p>Attack</p>
+          <p>Affinity</p>
+          <p>Rampage Skill</p>
+        </div>
+        </div>
+
+      </div>
+      <div className="pure-u-1-3"><p>Thirds</p></div>
+      <div className="pure-u-1-3"><p>Thirds</p></div>
     </div>
   );
 }
