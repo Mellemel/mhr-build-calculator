@@ -1,23 +1,24 @@
 import './App.css';
-import baseWeaponImage from './images/weapon_greatsword_r1.png';
+import { ArmorRow, WeaponRow } from './components';
 
 function App() {
   return (
     <div className="pure-g">
       <div className="pure-u-1-3">
-        <div>
-        <img className="img-base-wearable" src={baseWeaponImage} alt="Stock Weapon" />
-        <div>
-          <input type="text"/>
-          <p>Attack</p>
-          <p>Affinity</p>
-          <p>Rampage Skill</p>
-        </div>
-        </div>
-
+        <h3>Gear Set</h3>
+        <WeaponRow />
+        <ArmorRow type='head' />
+        <ArmorRow type='chest' />
+        <ArmorRow type='arms' />
+        <ArmorRow type='waist' />
+        <ArmorRow type='legs' />
       </div>
-      <div className="pure-u-1-3"><p>Thirds</p></div>
-      <div className="pure-u-1-3"><p>Thirds</p></div>
+      <div className="pure-u-1-3">
+        <h3>Skills</h3>
+      </div>
+      <div className="pure-u-1-3">
+        <h3>Stats</h3>
+      </div>
     </div>
   );
 }

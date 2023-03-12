@@ -1,5 +1,5 @@
-.pure-g {
-  padding: 25px;
+#root > .pure-g {
+  padding: 0 25px;
 }
 
 .img-base-wearable {
