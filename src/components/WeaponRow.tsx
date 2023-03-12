@@ -3,10 +3,12 @@ import GearRow from './Shared/GearRow';
 
 function WeaponRow() {
   return (
-    <GearRow image={baseWeaponImage}>
+    <GearRow image={baseWeaponImage} title='N/A'>
+      <div className='pure-g'>
         <p>Attack</p>
         <p>Affinity</p>
-        <p>Rampage Skill</p>
+      </div>
+      <p>Rampage Skill</p>
     </GearRow>
   )
 }

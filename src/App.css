@@ -1,5 +1,6 @@
 #root > .pure-g {
-  padding: 0 25px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .img-base-wearable {

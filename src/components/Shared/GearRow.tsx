@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 import Row from "./Row";
 
 interface GearRowProps extends PropsWithChildren {
+  title: string;
   image: string;
 }
 
@@ -12,7 +13,7 @@ function GearRow(props: GearRowProps) {
         <img className="img-base-wearable" src={props.image} alt="Stock Weapon" />
       </div>
       <div className="pure-u-3-4">
-      <input type="text" />
+        <p>{props.title}</p>
         {props.children}
       </div>
     </Row>

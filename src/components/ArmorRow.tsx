@@ -13,10 +13,9 @@ interface ArmorRowProps {
 
 function ArmorRow(props: ArmorRowProps) {
   return (
-    <GearRow image={imageType[props.type]}>
-      <div className="pure-u-3-4">
+    <GearRow image={imageType[props.type]} title='N/A'>
+      <div className='pure-g'>
         <p>Defense</p>
-        <p>Resistance</p>
         <p>Fire</p>
         <p>Water</p>
         <p>Ice</p>
