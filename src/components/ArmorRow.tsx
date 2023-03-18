@@ -1,9 +1,9 @@
-import baseHeadArmor from '../images/armour_head_r1.png';
-import baseChestArmor from '../images/armour_chest_r1.png';
-import baseArmsArmor from '../images/armour_arms_r1.png';
-import baseWaistArmor from '../images/armour_waist_r1.png';
-import baseLegsArmor from '../images/armour_legs_r1.png';
-import GearRow from './Shared/GearRow';
+import baseHeadArmor from '../images/armors/armour_head_r1.png';
+import baseChestArmor from '../images/armors/armour_chest_r1.png';
+import baseArmsArmor from '../images/armors/armour_arms_r1.png';
+import baseWaistArmor from '../images/armors/armour_waist_r1.png';
+import baseLegsArmor from '../images/armors/armour_legs_r1.png';
+import GearRow from './GearRow';
 
 type Armor = 'head' | 'chest' | 'arms' | 'waist' | 'legs';
 

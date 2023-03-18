@@ -2,3 +2,34 @@ body {
   background-color: #424B54;
   color: #FFF6E5;
 }
+
+#root > .pure-g {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.column-container {
+  background-color: darkcyan;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.row-container {
+  background-color: #82A6B1;
+  margin-bottom: 15px;
+}
+
+.img-base-wearable {
+  background-color: #424B54;
+  height: 60px;
+  width: 60px;
+  margin: 15px;
+  padding: 5px;
+}
+
+.icon-container {
+  background-color: darkcyan;
+  padding: 5px 7px 5px 2px;
+  margin-right: 5px;
+  align-items: end;
+}
