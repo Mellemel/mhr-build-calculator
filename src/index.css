@@ -33,3 +33,8 @@ body {
   margin-right: 5px;
   align-items: end;
 }
+
+.icon-container-svg {
+  width: 25px;
+  height: 25px;
+}
