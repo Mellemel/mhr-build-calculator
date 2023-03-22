@@ -1,14 +1,14 @@
 interface ImageCounterProps {
   icon: React.ReactNode;
-  counter?: number;
+  counter?: string;
 }
 
-function ImageCounter(props: ImageCounterProps) {
+function ImageContainer(props: ImageCounterProps) {
   return (
     <div className="icon-container pure-g">
       {props.icon}
-      <span>{props.counter ?? 'N/A'}</span>
+      <span><small>{props.counter ?? 'N/A'}</small></span>
     </div>
   )
 }
-export default ImageCounter;
+export default ImageContainer;

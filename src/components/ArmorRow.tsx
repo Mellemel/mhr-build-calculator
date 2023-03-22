@@ -1,5 +1,5 @@
 import GearRow from './GearRow';
-import ImageCounter from './ImageCounter';
+import ImageContainer from './ImageCounter';
 
 import baseHeadArmor from '../images/armors/armour_head_r1.png';
 import baseChestArmor from '../images/armors/armour_chest_r1.png';
@@ -23,12 +23,12 @@ function ArmorRow(props: ArmorRowProps) {
   return (
     <GearRow image={imageType[props.type]} title='N/A'>
       <div className='pure-g'>
-        <ImageCounter icon={<img className='icon-container-svg' src={DefenseIcon} alt="Defense Icon" />}/>
-        <ImageCounter icon={<ElementalFireIcon className='icon-container-svg' />}/>
-        <ImageCounter icon={<ElementalWaterIcon className='icon-container-svg' />}/>
-        <ImageCounter icon={<ElementalIceIcon className='icon-container-svg' />}/>
-        <ImageCounter icon={<ElementalThunderIcon className='icon-container-svg' />}/>
-        <ImageCounter icon={<ElementalDragonIcon className='icon-container-svg' />}/>
+        <ImageContainer icon={<img className='icon-container-svg' src={DefenseIcon} alt="Defense Icon" />}/>
+        <ImageContainer icon={<ElementalFireIcon className='icon-container-svg' />}/>
+        <ImageContainer icon={<ElementalWaterIcon className='icon-container-svg' />}/>
+        <ImageContainer icon={<ElementalIceIcon className='icon-container-svg' />}/>
+        <ImageContainer icon={<ElementalThunderIcon className='icon-container-svg' />}/>
+        <ImageContainer icon={<ElementalDragonIcon className='icon-container-svg' />}/>
       </div>
     </GearRow>
   )

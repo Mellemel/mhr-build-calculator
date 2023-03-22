@@ -3,6 +3,10 @@ body {
   color: #FFF6E5;
 }
 
+.title {
+  margin: 0px 0px 5px 0px;
+}
+
 #root > .pure-g {
   max-width: 1200px;
   margin: auto;
@@ -16,6 +20,7 @@ body {
 
 .row-container {
   background-color: #82A6B1;
+  padding: 15px;
   margin-bottom: 15px;
 }
 
@@ -23,7 +28,7 @@ body {
   background-color: #424B54;
   height: 60px;
   width: 60px;
-  margin: 15px;
+  margin-right: 15px;
   padding: 5px;
 }
 
@@ -35,6 +40,7 @@ body {
 }
 
 .icon-container-svg {
-  width: 25px;
-  height: 25px;
+  width: 17px;
+  height: 17px;
+  margin: 1px 5px 1px 1px;
 }
