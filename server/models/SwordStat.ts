@@ -6,9 +6,9 @@ export class SwordStat extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column('simple-array')
   baseSharpness: number[] = [];
-  @Column()
+  @Column('simple-array')
   maxSharpness: number[] = [];
 
   @OneToOne(() => Weapon, {nullable: false})

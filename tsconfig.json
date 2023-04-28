@@ -23,8 +23,9 @@
     "experimentalDecorators": true
   },
   "include": [
-    "src"
-, "src/database.ts"  ],
+    "src", 
+    "server" 
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs"
