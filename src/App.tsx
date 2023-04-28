@@ -1,6 +1,12 @@
+import { useEffect } from 'react';
 import { ArmorRow, WeaponRow } from './components';
+import { Database } from './database';
 
 function App() {
+  useEffect(() => {
+    Database.initialize()
+  }, [])
+  
   return (
     <div className="pure-g">
       <div className="column-container pure-u-1-2">
