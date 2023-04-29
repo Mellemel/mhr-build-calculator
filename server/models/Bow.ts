@@ -10,7 +10,7 @@ interface BowWeaponChargeShot {
 }
 
 @Entity()
-export class BowStat extends BaseEntity {
+export class Bow extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

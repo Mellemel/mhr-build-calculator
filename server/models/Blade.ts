@@ -2,7 +2,7 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToOne, JoinColum
 import { Weapon } from "./Weapon";
 
 @Entity()
-export class SwordStat extends BaseEntity {
+export class Blade extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
