@@ -11,14 +11,18 @@ const AppDataSource = new DataSource({
 })
 
 export class Database {
-  private static instance: DataSource;
+  private static client: DataSource;
 
   private constructor(){}
 
   public static async initialize() {
-    if (!Database.instance) {
-      Database.instance = await AppDataSource.initialize();
+    this.client = await AppDataSource.initialize();
+  }
+
+  public static async getClient() {
+    if (!this.client) {
+      await this.initialize();
     }
-    return Database.instance;
+    return this.client;
   }
 }

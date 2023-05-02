@@ -19,8 +19,8 @@ export class Bow extends BaseEntity {
   @Column()
   baseChargeLevelLimit: number = 0;
   @Column('simple-array')
-  chargeShot: BowWeaponChargeShot[] = [];
-  @Column('simple-array')
+  chargeShots: BowWeaponChargeShot[] = [];
+  @Column('simple-json')
   compatibleCoatings: CoatingType[] = [];
 
   @OneToOne(() => Weapon, {nullable: false})
