@@ -70,8 +70,18 @@ const relatedWeaponRecordFunctions = {
     const bow = new Bow();
     bow.arcShot = weaponData.arc_shot;
     bow.baseChargeLevelLimit = weaponData.base_charge_level_limit;
-    bow.chargeShots = weaponData.charge_shot.map((charge: any) => ({ type: charge[0], level: charge[1] }));
-    bow.compatibleCoatings = weaponData
+    bow.chargeShots = weaponData.charge_shot.map((charge: any) => ({
+      type: charge[0], level: charge[1]
+    }));
+    bow.compatibleCoatings = {
+      blast: weaponData.compatible_coatings.blast_coating === 1,
+      closeRange: weaponData.compatible_coatings.close_range_coating === 1,
+      exhaust: weaponData.compatible_coatings.exhaust_coating === 1,
+      para: weaponData.compatible_coatings.para_coating === 1,
+      poison: weaponData.compatible_coatings.poison_coating === 1,
+      power: weaponData.compatible_coatings.power_coating === 1,
+      sleep: weaponData.compatible_coatings.sleep === 1,
+    }
   },
   [WeaponType.ChargeBlade]: () => console.log('Charge Blade function'),
   [WeaponType.DualBlades]: () => console.log('Dual Blades function'),
