@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Weapon } from "./Weapon";
+import { Weapon } from ".";
 
 export enum ArchShotType {
   Recovery = 'recovery',

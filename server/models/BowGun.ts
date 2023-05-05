@@ -1,6 +1,6 @@
 import { BaseEntity, Column, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Weapon } from "./Weapon";
-import { BowGunAmmo } from "./BowGunAmmo";
+import { Weapon } from ".";
+import { BowGunAmmo } from ".";
 
 interface BowGunDeviation {
   left: boolean;

@@ -1,5 +1,5 @@
 import { BaseEntity, Column, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Weapon } from "./Weapon";
+import { Weapon } from ".";
 
 type ShellingType = 'normal' | 'long' | 'wide';
 

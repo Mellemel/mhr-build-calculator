@@ -1,5 +1,5 @@
 import { BaseEntity, Column, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Weapon } from "./Weapon";
+import { Weapon } from ".";
 
 export class HuntingHorn extends BaseEntity {
   @PrimaryGeneratedColumn()

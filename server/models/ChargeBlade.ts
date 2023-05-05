@@ -1,16 +1,13 @@
-import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Weapon } from "./Weapon";
+import { ChildEntity, Column } from "typeorm";
+import { Blade } from ".";
 
-type PhialType = 'power' | 'element' | 'impact' | 'exhaust' | 'elemental';
+export enum PhialType {
+  Element = 'element',
+  Impact = 'impact',
+}
 
-@Entity()
-export class ChargeBlade extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
-  @Column('simple-enum', {nullable: false})
+@ChildEntity()
+export class ChargeBlade extends Blade {
+  @Column('simple-enum', { nullable: false })
   phialType!: PhialType;
-
-  @OneToOne(() => Weapon, {nullable: false})
-  weapon!: Weapon;
 }

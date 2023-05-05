@@ -1,5 +1,5 @@
 import { BaseEntity, Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { BowGun } from "./BowGun";
+import { BowGun } from ".";
 
 type Ammo = 'normal' | 'piercing' | 'spread' | 'shrapnel' | 'sticky' | 'cluster';
 

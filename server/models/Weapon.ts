@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm"
-import { RampageSkill } from "./RampageSkill";
+import { RampageSkill } from ".";
 
 export enum WeaponType {
   Bow = 'bow',
