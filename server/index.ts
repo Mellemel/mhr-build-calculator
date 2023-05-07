@@ -19,8 +19,7 @@ async function seedData() {
           return record ?? Database.createRampageSkillRecord(skill.name, skill.level);
         })
       )
-      const weaponRecord = await Database.createWeaponRecord(weaponData, weaponType, rampageSkillRecords);
-      Database.createRelatedWeaponRecord(weaponRecord, weaponData);
+      Database.createWeaponRecord(weaponType, rampageSkillRecords, weaponData);
     }
   }
 }

@@ -1,57 +1,56 @@
 import { BaseEntity, DataSource } from "typeorm";
-import { RampageSkill } from "./models/RampageSkill";
-import { Weapon, WeaponType } from "./models/Weapon";
-import { mapElementStat } from "./transformers";
+import { BowGunAmmo, mapBowGunAmmo, mapElementStat } from "./transformers";
 import dbConfig from "./db-config";
-import { Bow, ArchShotType } from "./models/Bow";
+import { Weapon, WeaponType } from "./models/Weapon";
+import { Blade, ChargeBlade, DualBlades, GreatSword, GunLance, Hammer, Lance, LongSword, ChargeBladePhialType, ShellingType, SwordAndShield, SwitchAxe } from "./models/weapons/Blades";
+import { ArchShotType, Bow } from "./models/weapons/Bow";
+import { RampageSkill } from "./models/RampageSkill";
+import { BowGun, HeavyBowGun, LightBowGun } from "./models/weapons/BowGun";
+import { HuntingHorn } from "./models/weapons/HuntingHorn";
+import { InsectGlaive } from "./models/weapons/InsectGlaive";
 
 export class Database {
   private static client: DataSource;
 
-  private static relatedWeaponRecordFunctionsMap: relatedWeaponRecordFunctionsType = {
+  private static weaponRecordFunctionsMap: relatedWeaponRecordFunctionsType = {
     [WeaponType.Bow]: this.createBowRecord,
-    [WeaponType.ChargeBlade]: () => console.log('Charge Blade function'),
-    [WeaponType.DualBlades]: () => console.log('Dual Blades function'),
-    [WeaponType.GreatSword]: () => console.log('Great Sword function'),
-    [WeaponType.GunLance]: () => console.log('Gunlance function'),
-    [WeaponType.Hammer]: () => console.log('Hammer function'),
-    [WeaponType.HeavyBowgun]: () => console.log('Heavy Bowgun function'),
-    [WeaponType.HuntingHorn]: () => console.log('Hunting Horn function'),
-    [WeaponType.InsectGlaive]: () => console.log('Insect Glaive function'),
-    [WeaponType.Lance]: () => console.log('Lance function'),
-    [WeaponType.LightBowgun]: () => console.log('Light Bowgun function'),
-    [WeaponType.LongSword]: () => console.log('Long Sword function'),
-    [WeaponType.SwitchAxe]: () => console.log('Switch Axe function'),
-    [WeaponType.SwordAndShield]: () => console.log('Sword and Shield function')
+    [WeaponType.ChargeBlade]: this.createChargeBladeRecord,
+    [WeaponType.DualBlades]: this.createBladeRecord<DualBlades>,
+    [WeaponType.GreatSword]: this.createBladeRecord<GreatSword>,
+    [WeaponType.GunLance]: this.createGunLanceRecord,
+    [WeaponType.Hammer]: this.createBladeRecord<Hammer>,
+    [WeaponType.HeavyBowgun]: this.createBowGunRecord<HeavyBowGun>,
+    [WeaponType.HuntingHorn]: this.createHuntingHornRecord,
+    [WeaponType.InsectGlaive]: this.createInsectGlaiveRecord,
+    [WeaponType.Lance]: this.createBladeRecord<Lance>,
+    [WeaponType.LightBowgun]: this.createBowGunRecord<LightBowGun>,
+    [WeaponType.LongSword]: this.createBladeRecord<LongSword>,
+    [WeaponType.SwitchAxe]: this.createBladeRecord<SwitchAxe>,
+    [WeaponType.SwordAndShield]: this.createBladeRecord<SwordAndShield>
   };
 
-  private constructor(){}
+  private constructor() { }
 
   public static async initialize() {
     const AppDataSource = new DataSource(dbConfig)
     this.client = await AppDataSource.initialize();
   }
-
   public static async getClient() {
     if (!this.client) {
       await this.initialize();
     }
     return this.client;
   }
-
   public static async retrieveRampageSkillRecord(name: string) {
     return RampageSkill.findOneBy({ name: name });
   }
-
   public static async createRampageSkillRecord(name: string, level: number) {
     const rampageSkill = new RampageSkill();
     rampageSkill.name = name;
     rampageSkill.level = level;
-    await rampageSkill.save()
-    return rampageSkill;
+    return rampageSkill.save();
   }
-
-  public static async createWeaponRecord(weaponData: any, weaponType: WeaponType, rampageSkills: RampageSkill[]) {
+  public static async createWeaponRecord(weaponType: WeaponType, rampageSkills: RampageSkill[], weaponData: any) {
     const weapon = new Weapon();
     weapon.name = weaponData.name;
     weapon.type = weaponType;
@@ -63,51 +62,138 @@ export class Database {
     weapon.decorationSlots = weaponData.decos;
     weapon.rampageSkills = rampageSkills;
     await weapon.save();
-    return weapon;
+    return this.createRelatedWeaponRecord(weapon, weaponData);
   }
-
-  public static async createRelatedWeaponRecord(weaponRecord: Weapon, weaponData: any) {
-    const relatedWeaponRecord = await this.relatedWeaponRecordFunctionsMap[weaponRecord.type](weaponData);
-    relatedWeaponRecord.weapon = weaponRecord
-    return relatedWeaponRecord.save();
+  private static async createRelatedWeaponRecord(weaponRecord: Weapon, weaponData: any) {
+    const relatedWeaponRecord = this.weaponRecordFunctionsMap[weaponRecord.type](weaponData);
+    relatedWeaponRecord.weapon = weaponRecord;
+    relatedWeaponRecord.save();
+    return relatedWeaponRecord;
   }
-
-  public static async createBowRecord(weaponData: BowData) {
+  private static createBowRecord(bowData: BowData) {
     const bow = new Bow();
-    bow.arcShot = weaponData.arc_shot;
-    bow.baseChargeLevelLimit = weaponData.base_charge_level_limit;
-    bow.chargeShots = weaponData.charge_shot.map((charge: any) => ({
+    const { bow_stats } = bowData;
+    bow.arcShot = bow_stats.arc_shot;
+    bow.baseChargeLevelLimit = bow_stats.base_charge_level_limit;
+    bow.chargeShots = bow_stats.charge_shot.map((charge: any) => ({
       type: charge[0], level: charge[1]
     }));
     bow.compatibleCoatings = {
-      blast: weaponData.compatible_coatings.blast_coating === 1,
-      closeRange: weaponData.compatible_coatings.close_range_coating === 1,
-      exhaust: weaponData.compatible_coatings.exhaust_coating === 1,
-      para: weaponData.compatible_coatings.para_coating === 1,
-      poison: weaponData.compatible_coatings.poison_coating === 1,
-      power: weaponData.compatible_coatings.power_coating === 1,
-      sleep: weaponData.compatible_coatings.sleep_coating === 1,
+      blast: bow_stats.compatible_coatings.blast_coating === 1,
+      closeRange: bow_stats.compatible_coatings.close_range_coating === 1,
+      exhaust: bow_stats.compatible_coatings.exhaust_coating === 1,
+      para: bow_stats.compatible_coatings.para_coating === 1,
+      poison: bow_stats.compatible_coatings.poison_coating === 1,
+      power: bow_stats.compatible_coatings.power_coating === 1,
+      sleep: bow_stats.compatible_coatings.sleep_coating === 1,
     }
-    await bow.save()
     return bow;
+  }
+  private static createChargeBladeRecord(chargeBladeData: ChargeBladeData & BladeData) {
+    const chargeBlade = new ChargeBlade();
+    chargeBlade.addSharpnessAttributes(chargeBladeData);
+    chargeBlade.phialType = chargeBladeData.chargeblade_stats.phial_type;
+    return chargeBlade;
+  }
+  private static createBladeRecord<T extends Blade>(bladeData: BladeData): T {
+    const blade = new Blade();
+    blade.addSharpnessAttributes(bladeData);
+    return blade as T;
+  }
+  private static createGunLanceRecord(gunLanceRecord: GunLanceData & BladeData) {
+    const gunLance = new GunLance();
+    gunLance.addSharpnessAttributes(gunLanceRecord);
+    gunLance.shellingType = gunLanceRecord.gunlance_stats.shelling_type;
+    gunLance.shellingLevel = gunLanceRecord.gunlance_stats.shelling_level;
+    return gunLance;
+  }
+  private static createBowGunRecord<T extends BowGun>(bowGunRecord: BowGunData) {
+    const bowGun = new BowGun();
+    const { bowgun_stats } = bowGunRecord;
+    bowGun.deviation = bowgun_stats.deviation;
+    bowGun.recoil = bowgun_stats.recoil;
+    bowGun.reloadSpeed = bowgun_stats.reload;
+    bowGun.ammoCapacity = mapBowGunAmmo(bowgun_stats.ammo)
+    return bowGun as T;
+  }
+  private static createHuntingHornRecord(huntingHornData: HuntingHornData) {
+    const huntingHorn = new HuntingHorn();
+    huntingHorn.songs = [
+      huntingHornData.huntinghorn_songs.a_a,
+      huntingHornData.huntinghorn_songs.x_x,
+      huntingHornData.huntinghorn_songs.xa_xa
+    ];
+    return huntingHorn;
+  }
+  private static createInsectGlaiveRecord(insectGlaiveData: InsectGlaiveData) {
+    const insectGlaive = new InsectGlaive();
+    insectGlaive.kinsectLevel = insectGlaiveData.insectglaive_stats.kinsect_level;
+    return insectGlaive;
   }
 }
 
+type InsectGlaiveData = {
+  insectglaive_stats: {
+    kinsect_level: 1
+  }
+}
+
+type HuntingHornData = {
+  huntinghorn_songs: {
+    a_a: string,
+    x_x: string,
+    xa_xa: string
+  }
+}
+
+type BowGunData = {
+  bowgun_stats: {
+    ammo: BowGunAmmo,
+    deviation: {
+      left: boolean,
+      right: boolean,
+      severity: number
+    }
+    recoil: number,
+    reload: number
+  }
+}
+
+type GunLanceData = {
+  gunlance_stats: {
+    shelling_level: number,
+    shelling_type: ShellingType
+  }
+}
+
+type ChargeBladeData = {
+  chargeblade_stats: {
+    phial_type: ChargeBladePhialType
+  }
+}
+
+type BladeData = {
+  base_sharpness: number[],
+  max_sharpness: number[]
+}
+
 type BowData = {
-  arc_shot: ArchShotType;
-  base_charge_level_limit: number;
-  charge_shot: [string, number][];
-  compatible_coatings: {
-    blast_coating: number;
-    close_range_coating: number;
-    exhaust_coating: number;
-    para_coating: number;
-    poison_coating: number;
-    power_coating: number;
-    sleep_coating: number;
-  };
+  bow_stats: {
+    arc_shot: ArchShotType;
+    base_charge_level_limit: number;
+    charge_shot: [string, number][];
+    compatible_coatings: {
+      blast_coating: number;
+      close_range_coating: number;
+      exhaust_coating: number;
+      para_coating: number;
+      poison_coating: number;
+      power_coating: number;
+      sleep_coating: number;
+    }
+  }
 };
 
 type relatedWeaponRecordFunctionsType = {
-  [key in WeaponType]: (arg: any) => Promise<BaseEntity & { weapon: Weapon }>;
+  [key in WeaponType]: (arg: any) => BaseEntity & { weapon: Weapon };
 };

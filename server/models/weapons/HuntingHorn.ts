@@ -1,12 +1,12 @@
 import { BaseEntity, Column, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Weapon } from ".";
+import { Weapon } from "../Weapon";
 
-export class InsectGlaive extends BaseEntity {
+export class HuntingHorn extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({nullable: false})
-  kinsectLevel!: number;
+  @Column('simple-array')
+  songs: string[] = [];
 
   @OneToOne(() => Weapon, {nullable: false})
   weapon!: Weapon
