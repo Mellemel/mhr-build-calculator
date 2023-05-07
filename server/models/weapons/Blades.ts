@@ -1,4 +1,4 @@
-import { BaseEntity, Column, OneToOne, JoinColumn, Entity, TableInheritance, ChildEntity } from "typeorm";
+import { BaseEntity, Column, OneToOne, JoinColumn, Entity, TableInheritance, ChildEntity, PrimaryGeneratedColumn } from "typeorm";
 import { Weapon } from "../Weapon";
 
 type BladeData = {
@@ -7,8 +7,11 @@ type BladeData = {
 }
 
 @Entity()
-@TableInheritance()
+@TableInheritance({ column: { name: 'type', type: 'varchar' } })
 export class Blade extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
   @Column('simple-array', {nullable: false})
   baseSharpness!: number[];
   @Column('simple-array', {nullable: false})
@@ -67,7 +70,7 @@ export class SwitchAxe extends Blade {
   @Column('simple-enum', {nullable: false})
   phialType!: SwitchAxePhialType;
   @Column()
-  phialValue: number | null = null;
+  phialValue!: number;
 }
 
 @ChildEntity()

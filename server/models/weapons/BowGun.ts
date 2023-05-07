@@ -22,7 +22,7 @@ export interface AmmoCapacity {
 }
 
 @Entity()
-@TableInheritance()
+@TableInheritance({ column: { name: 'type', type: 'varchar' } })
 export class BowGun extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
