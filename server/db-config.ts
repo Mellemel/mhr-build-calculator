@@ -2,7 +2,7 @@ import { DataSourceOptions } from "typeorm";
 
 const dbConfig: DataSourceOptions = {
   type: "sqlite",
-  database: "server/sqlite-mhr-database",
+  database: "server/mhr-database.sqlite",
   synchronize: true,
   logging: true,
   entities: ["server/models/**/*.ts"],

@@ -49,7 +49,7 @@ export class Weapon extends BaseEntity {
   defense!: number;
   @Column('smallint', { nullable: false })
   rarity!: number;
-  @Column('simple-array')
+  @Column('simple-array', { nullable: true })
   decorationSlots!: (number[] | null);
 
   @ManyToMany(() => RampageSkill)

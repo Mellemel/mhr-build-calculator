@@ -1,4 +1,4 @@
-import { BaseEntity, DataSource } from "typeorm";
+import { BaseEntity, DataSource, FindOperator, FindOptionsWhere } from "typeorm";
 import { BowGunAmmo, mapBowGunAmmo, mapElementStat } from "./transformers";
 import dbConfig from "./db-config";
 import { Weapon, WeaponType } from "./models/Weapon";
@@ -44,10 +44,9 @@ export class Database {
   public static async retrieveRampageSkillRecord(name: string) {
     return RampageSkill.findOneBy({ name: name });
   }
-  public static async createRampageSkillRecord(name: string, level: number) {
+  public static async createRampageSkillRecord(name: string) {
     const rampageSkill = new RampageSkill();
     rampageSkill.name = name;
-    rampageSkill.level = level;
     return rampageSkill.save();
   }
   public static async createWeaponRecord(weaponType: WeaponType, rampageSkills: RampageSkill[], weaponData: any) {

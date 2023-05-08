@@ -7,6 +7,4 @@ export class RampageSkill extends BaseEntity {
 
   @Column()
   name!: string;
-  @Column('smallint')
-  level!: number;
 }

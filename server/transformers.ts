@@ -1,11 +1,7 @@
 import { AmmoCapacity, AmmoTypes } from "./models/weapons/BowGun";
 import { ElementType } from "./models/Weapon";
 
-export function mapRampageSkills(skills: string[]) {
-  return skills.map(skill => ({name: skill.slice(0, -2), level: parseInt(skill.slice(-1))}))
-}
-
-export function mapElementStat(elementStat: {[key: string]: number}) {
+export function mapElementStat(elementStat: { [key: string]: number }) {
   const key = Object.keys(elementStat)[0];
   if (key) {
     return {
@@ -30,7 +26,7 @@ export function mapBowGunAmmo(ammos: BowGunAmmo): AmmoCapacity[] {
   Object.keys(ammos).forEach((ammoType) => {
     ammos[ammoType].forEach((set) => {
       if (set.available === true) {
-        bowgunStats.push({ type: ammoType as AmmoTypes, value: set.ammo_capacity});
+        bowgunStats.push({ type: ammoType as AmmoTypes, value: set.ammo_capacity });
       }
     });
   });
