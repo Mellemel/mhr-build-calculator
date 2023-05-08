@@ -1,4 +1,4 @@
-import { BaseEntity, DataSource, FindOperator, FindOptionsWhere } from "typeorm";
+import { BaseEntity, DataSource } from "typeorm";
 import { BowGunAmmo, mapBowGunAmmo, mapElementStat } from "./transformers";
 import dbConfig from "./db-config";
 import { Weapon, WeaponType } from "./models/Weapon";

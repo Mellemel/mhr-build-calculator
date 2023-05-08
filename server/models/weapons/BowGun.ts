@@ -1,4 +1,4 @@
-import { BaseEntity, ChildEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
+import { BaseEntity, ChildEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
 import { Weapon } from "../Weapon";
 
 interface BowGunDeviation {
@@ -37,6 +37,7 @@ export class BowGun extends BaseEntity {
   ammoCapacity!: AmmoCapacity[]
 
   @OneToOne(() => Weapon, {nullable: false})
+  @JoinColumn()
   weapon!: Weapon
 }
 

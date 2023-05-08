@@ -1,6 +1,7 @@
-import { BaseEntity, Column, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Weapon } from "../Weapon";
 
+@Entity()
 export class HuntingHorn extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -9,5 +10,6 @@ export class HuntingHorn extends BaseEntity {
   songs: string[] = [];
 
   @OneToOne(() => Weapon, {nullable: false})
+  @JoinColumn()
   weapon!: Weapon
 }
