@@ -1,6 +1,19 @@
+import { useEffect, useState } from 'react';
+import { ClientDatabase } from '@data-processing/database-client';
+import { Weapon } from '@data-processing/models/Weapon';
+
 import { ArmorRow, WeaponRow } from './components';
 
 function App() {
+  const [weapons, setWeapons] = useState<Weapon[]>([]);
+  useEffect(() => {
+    (async () => {
+      await ClientDatabase.initialize();
+      const weapons = await Weapon.find();
+      setWeapons(weapons);
+    })()
+  }, []);
+
   return (
     <div className="pure-g">
       <div className="column-container pure-u-1-2">

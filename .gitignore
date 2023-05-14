@@ -24,5 +24,5 @@ yarn-error.log*
 
 # Repo
 images
-server/data
-*database*
+data-processing/raw
+*.sqlite

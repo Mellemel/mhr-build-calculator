@@ -1,0 +1,9 @@
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@data-processing/*": ["./data-processing/*"],
+    }
+  }
+}

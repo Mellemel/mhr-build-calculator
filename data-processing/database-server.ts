@@ -1,17 +1,16 @@
-import { BaseEntity, DataSource } from "typeorm";
+import { BaseEntity } from "typeorm";
 import { BowGunAmmo, mapBowGunAmmo, mapElementStat } from "./transformers";
-import dbConfig from "./db-config";
 import { Weapon, WeaponType } from "./models/Weapon";
 import { Blade, ChargeBlade, DualBlades, GreatSword, GunLance, Hammer, Lance, LongSword, ChargeBladePhialType, ShellingType, SwordAndShield, SwitchAxe } from "./models/weapons/Blades";
 import { ArchShotType, Bow } from "./models/weapons/Bow";
 import { RampageSkill } from "./models/RampageSkill";
 import { BowGun, HeavyBowGun, LightBowGun } from "./models/weapons/BowGun";
 import { HuntingHorn } from "./models/weapons/HuntingHorn";
-import { InsectGlaive } from "./models/weapons/InsectGlaive";
+import { InsectGlaive } from "./models/weapons/InsectGlaive"; 
+import { DataBase } from "./database";
+import { dbConfig } from "./database-configurations";
 
-export class Database {
-  private static client: DataSource;
-
+export class ServerDatabase extends DataBase {
   private static weaponRecordFunctionsMap: relatedWeaponRecordFunctionsType = {
     [WeaponType.Bow]: this.createBowRecord,
     [WeaponType.ChargeBlade]: this.createChargeBladeRecord,
@@ -28,18 +27,8 @@ export class Database {
     [WeaponType.SwitchAxe]: this.createBladeRecord<SwitchAxe>,
     [WeaponType.SwordAndShield]: this.createBladeRecord<SwordAndShield>
   };
-
-  private constructor() { }
-
   public static async initialize() {
-    const AppDataSource = new DataSource(dbConfig)
-    this.client = await AppDataSource.initialize();
-  }
-  public static async getClient() {
-    if (!this.client) {
-      await this.initialize();
-    }
-    return this.client;
+    super.initialize(dbConfig);
   }
   public static async retrieveRampageSkillRecord(name: string) {
     return RampageSkill.findOneBy({ name: name });

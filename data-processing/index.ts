@@ -1,11 +1,11 @@
-import { Database } from "./database";
-import { default as weaponData } from './data/mhr_weapon_data.json';
+import { ServerDatabase } from "./database-server";
+import { default as weaponData } from './raw/mhr_weapon_data.json';
 import { WeaponType } from "./models/Weapon";
 
 seedData()
 
 async function seedData() {
-  await Database.initialize();
+  await ServerDatabase.initialize();
 
   const weaponTypes = Object.keys(weaponData) as WeaponType[];
   for (const weaponType of weaponTypes) {
@@ -14,11 +14,11 @@ async function seedData() {
       const rampageSkills = weaponData.ramps[0]
       const rampageSkillRecords = await Promise.all(
         rampageSkills.map(async (skill) => {
-          const record = await Database.retrieveRampageSkillRecord(skill);
-          return record ?? Database.createRampageSkillRecord(skill);
+          const record = await ServerDatabase.retrieveRampageSkillRecord(skill);
+          return record ?? ServerDatabase.createRampageSkillRecord(skill);
         })
       )
-      Database.createWeaponRecord(weaponType, rampageSkillRecords, weaponData);
+      ServerDatabase.createWeaponRecord(weaponType, rampageSkillRecords, weaponData);
     }
   }
 }

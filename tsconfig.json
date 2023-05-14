@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "ES6",
     "lib": [
@@ -23,8 +24,8 @@
     "experimentalDecorators": true
   },
   "include": [
-    "src", 
-    "server" 
+    "src",
+    "data-processing"
   ],
   "ts-node": {
     "compilerOptions": {
