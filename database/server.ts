@@ -1,7 +1,7 @@
 import { BaseEntity } from "typeorm";
 import { BowGunAmmo, mapBowGunAmmo, mapElementStat } from "../data-processing/transformers";
 import { Weapon, WeaponType } from "./models/Weapon";
-import { Blade, ChargeBlade, DualBlades, GreatSword, GunLance, Hammer, Lance, LongSword, ChargeBladePhialType, ShellingType, SwordAndShield, SwitchAxe } from "./models/weapons/Blades";
+import { Blade, ChargeBlade, DualBlades, GreatSword, GunLance, Hammer, Lance, LongSword, ChargeBladePhialType, ShellingType, SwordAndShield, SwitchAxe } from "./models/weapons/Blade";
 import { ArchShotType, Bow } from "./models/weapons/Bow";
 import { RampageSkill } from "./models/RampageSkill";
 import { BowGun, HeavyBowGun, LightBowGun } from "./models/weapons/BowGun";

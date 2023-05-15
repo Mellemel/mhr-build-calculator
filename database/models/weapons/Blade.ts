@@ -48,9 +48,9 @@ export type ShellingType = 'normal' | 'long' | 'wide';
 
 @ChildEntity()
 export class GunLance extends Blade {
-  @Column({ nullable: false })
+  @Column('simple-enum', { nullable: false })
   shellingType!: ShellingType;
-  @Column()
+  @Column('int')
   shellingLevel: number = 0;
 }
 
@@ -69,7 +69,7 @@ type SwitchAxePhialType = 'elemental' | 'exhaust' | 'dragon' | 'power' | 'paraly
 export class SwitchAxe extends Blade {
   @Column('simple-enum', {nullable: false})
   phialType!: SwitchAxePhialType;
-  @Column()
+  @Column('int')
   phialValue!: number;
 }
 
