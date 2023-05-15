@@ -6,7 +6,7 @@ export class InsectGlaive extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({nullable: false})
+  @Column('smallint', {nullable: false})
   kinsectLevel!: number;
 
   @OneToOne(() => Weapon, {nullable: false})

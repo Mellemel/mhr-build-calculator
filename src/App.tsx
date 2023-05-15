@@ -9,8 +9,8 @@ function App() {
   useEffect(() => {
     (async () => {
       await ClientDatabase.initialize();
-      // const weapons = await Weapon.find();
-      // setWeapons(weapons);
+      const weapons = await Weapon.find({where: {rarity: 1}});
+      setWeapons(weapons);
     })()
   }, []);
 

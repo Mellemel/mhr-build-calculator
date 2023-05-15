@@ -35,17 +35,17 @@ export class Weapon extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ nullable: false })
+  @Column('text', { nullable: false })
   name!: string;
   @Column('simple-enum', { nullable: false })
   type!: WeaponType;
-  @Column({ nullable: false })
+  @Column('int', { nullable: false })
   attack!: number;
-  @Column({ nullable: false })
+  @Column('int', { nullable: false })
   affinity!: number;
   @Column('simple-json', { nullable: true })
   element!: (ElementalStat | null);
-  @Column({ nullable: false })
+  @Column('int', { nullable: false })
   defense!: number;
   @Column('smallint', { nullable: false })
   rarity!: number;

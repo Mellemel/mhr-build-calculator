@@ -5,6 +5,6 @@ export class RampageSkill extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column('text')
   name!: string;
 }

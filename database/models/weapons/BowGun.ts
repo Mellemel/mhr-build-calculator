@@ -29,9 +29,9 @@ export class BowGun extends BaseEntity {
 
   @Column('simple-json', {nullable: false})
   deviation!: BowGunDeviation;
-  @Column({nullable: false})
+  @Column('smallint', {nullable: false})
   recoil!: number;
-  @Column({nullable: false})
+  @Column('smallint', {nullable: false})
   reloadSpeed!: number;
   @Column('simple-json', {nullable: false})
   ammoCapacity!: AmmoCapacity[]

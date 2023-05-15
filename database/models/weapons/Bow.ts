@@ -34,7 +34,7 @@ export class Bow extends BaseEntity {
 
   @Column('simple-enum', { nullable: false })
   arcShot!: ArchShotType;
-  @Column({ nullable: false })
+  @Column('int', { nullable: false })
   baseChargeLevelLimit!: number;
   @Column('simple-array', { nullable: false })
   chargeShots!: BowWeaponChargeShot[];
