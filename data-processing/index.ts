@@ -1,6 +1,6 @@
-import { ServerDatabase } from "./database-server";
-import { default as weaponData } from './raw/mhr_weapon_data.json';
-import { WeaponType } from "./models/Weapon";
+import { ServerDatabase } from "../database/server";
+import { default as weaponData } from './mhr_weapon_data.json';
+import { WeaponType } from "../database/models/Weapon";
 
 seedData()
 

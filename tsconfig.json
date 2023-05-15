@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "ES6",
     "lib": [
@@ -21,11 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
   },
   "include": [
     "src",
-    "data-processing"
+    "data-processing",
+    "database"
   ],
   "ts-node": {
     "compilerOptions": {

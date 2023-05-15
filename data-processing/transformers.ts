@@ -1,5 +1,5 @@
-import { AmmoCapacity, AmmoTypes } from "./models/weapons/BowGun";
-import { ElementType } from "./models/Weapon";
+import { AmmoCapacity, AmmoTypes } from "../database/models/weapons/BowGun";
+import { ElementType } from "../database/models/Weapon";
 
 export function mapElementStat(elementStat: { [key: string]: number }) {
   const key = Object.keys(elementStat)[0];
